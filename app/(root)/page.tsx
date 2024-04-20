@@ -36,10 +36,14 @@ async function fetchData() {
   let response: res[];
   const host = process.env.NEXT_PUBLIC_HOST;
 
+  console.log(host);
+
   response = await fetch(`http://${host}/api/post/getPost`, {
     cache: "no-store",
     method: "GET",
   }).then((r) => r.json());
+
+  console.log(response);
 
   if (response) {
     return response;

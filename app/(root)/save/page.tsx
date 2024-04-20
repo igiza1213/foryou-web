@@ -1,4 +1,3 @@
-import { createClient } from "@/utils/supabase/server";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
