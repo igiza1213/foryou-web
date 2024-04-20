@@ -1,9 +1,11 @@
 "use client";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEventHandler } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const target = e.currentTarget;
@@ -22,6 +24,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       method: "POST",
       body: JSON.stringify(body),
     });
+
+    router.push("/");
   };
   return (
     <form onSubmit={onSubmit}>
