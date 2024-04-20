@@ -1,10 +1,13 @@
 import { createClient } from "@/utils/supabase/server";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Heart } from "lucide-react";
+import { cn } from "@/lib/utils";
+import HeartButton from "./_components/HeartButton";
+import HeartButton2 from "./_components/HeartButton2";
 
 const hardCoding = [
   { title: "롯데월드", img: "images/lotte.png", heart: "5.3" },
-  { title: "콘서트", img: "images/con.png", heart: "5.3" },
+  { title: "콘서트", img: "images/co.png", heart: "5.3" },
   { title: "서울숲", img: "images/lotte.png", heart: "5.3" },
   { title: "한강", img: "images/lotte.png", heart: "5.3" },
   { title: "경복궁", img: "images/lotte.png", heart: "5.3" },
@@ -30,23 +33,18 @@ const images = [
 ];
 
 async function fetchData() {
-  try {
-    let response: res[];
-    const host = process.env.HOST;
+  let response: res[];
+  const host = process.env.NEXT_PUBLIC_HOST;
 
-    response = await fetch(`http://${host}/api/post/getPost`, {
-      cache: "no-store",
-      method: "GET",
-    }).then((r) => r.json());
+  response = await fetch(`http://${host}/api/post/getPost`, {
+    cache: "no-store",
+    method: "GET",
+  }).then((r) => r.json());
 
-    if (response) {
-      return response;
-    } else {
-      console.log("res.result is not an array or res is undefined");
-      return;
-    }
-  } catch (error) {
-    console.error(error);
+  if (response) {
+    return response;
+  } else {
+    console.log("res.result is not an array or res is undefined");
     return;
   }
 }
@@ -73,15 +71,7 @@ export default async function Index() {
                     <div className="h-[30px] text-white text-[25px] font-semibold font-pre">
                       {args.title}
                     </div>
-                    <div className="h-[14px] justify-start items-center gap-[5px] inline-flex">
-                      <Heart
-                        className="w-4 text-rose-400"
-                        strokeWidth={"2.25"}
-                      />
-                      <div className="text-white text-xs font-medium font-pre">
-                        {args.heart}K
-                      </div>
-                    </div>
+                    <HeartButton data={args.heart} />
                   </div>
                 </div>
               ))}
@@ -107,12 +97,7 @@ export default async function Index() {
                       {args.content}
                     </div>
                   </div>
-                  <div className="h-[14px] justify-start items-center gap-[3px] inline-flex">
-                    <Heart className="w-4 text-rose-400" strokeWidth={"2.25"} />
-                    <div className="text-rose-400 text-xs font-medium font-pre">
-                      {args.like}
-                    </div>
-                  </div>
+                  <HeartButton2 data={args} />
                 </div>
               </div>
 

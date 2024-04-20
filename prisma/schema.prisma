@@ -17,3 +17,11 @@ model Posts {
   prise      String?
   location   String?
 }
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model savePost {
+  id         Int      @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  posts      Int[]
+  uid        String   @id
+}
