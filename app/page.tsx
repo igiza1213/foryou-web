@@ -1,9 +1,4 @@
-import DeployButton from "../components/DeployButton";
-import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
-import Header from "@/components/Header";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Heart } from "lucide-react";
 
@@ -39,7 +34,6 @@ async function fetchData() {
     let response: res[];
 
     response = await fetch(`http://localhost:3000/api/post/getPost`, {
-      cache: "no-store",
       method: "GET",
     }).then((r) => r.json());
 
@@ -56,19 +50,6 @@ async function fetchData() {
 }
 
 export default async function Index() {
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-
-  const isSupabaseConnected = canInitSupabaseClient();
-
   const result = await fetchData();
 
   return (
@@ -108,7 +89,7 @@ export default async function Index() {
           </ScrollArea>
         </div>
         <ScrollArea className="flex-col justify-center items-start gap-[25px] flex">
-          {result!.map((args, i) => (
+          {result?.map((args, i) => (
             <div
               key={i}
               className="flex-col justify-start items-start gap-[14px] flex"
