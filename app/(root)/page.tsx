@@ -4,6 +4,7 @@ import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import HeartButton from "./_components/HeartButton";
 import HeartButton2 from "./_components/HeartButton2";
+import Link from "next/link";
 
 const hardCoding = [
   { title: "롯데월드", img: "images/lotte.png", heart: "5.3" },
@@ -60,9 +61,12 @@ export default async function Index() {
     <div className="w-[375px] pt-[14px] mt-[22px] bg-white rounded-[25px] shadow">
       <div className="w-full h-[609px] flex-col justify-start items-center gap-[38px] inline-flex">
         <div className=" flex-col justify-start items-start gap-[19px] flex">
-          <div className="text-black text-lg font-semibold font-pre ml-[27px]">
+          <Link
+            href={"/chat1"}
+            className="text-black text-lg font-semibold font-pre ml-[27px]"
+          >
             선호도 Top 5
-          </div>
+          </Link>
           <ScrollArea className="whitespace-nowrap w-screen ">
             <div className="w-max flex">
               {hardCoding.map((args, i) => (
