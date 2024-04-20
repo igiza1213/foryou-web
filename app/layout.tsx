@@ -1,7 +1,4 @@
-import { GeistSans } from "geist/font/sans";
-import { Bookmark } from "lucide-react";
 import localFont from "next/font/local";
-import Link from "next/link";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -13,6 +10,21 @@ export const metadata = {
   title: "Next.js and Supabase Starter Kit",
   description: "The fastest way to build apps with Next.js and Supabase",
 };
+
+const nanum = localFont({
+  src: [
+    {
+      path: "../public/fonts/NanumSquareNeoOTF-Rg.otf",
+      weight: "400",
+    },
+    {
+      path: "../public/fonts/NanumSquareNeoOTF-Bd.otf",
+      weight: "700",
+    },
+  ],
+  variable: "--nanum-font",
+  display: "swap",
+});
 
 const pretendard = localFont({
   src: [
@@ -43,24 +55,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className={`${pretendard.variable}`}>
+    <html lang="ko" className={`${pretendard.variable} ${nanum.variable}`}>
       <body className="bg-background text-foreground min-w-[375px]">
-        <header>
-          <div className="w-full h-[153px] px-[15px] py-[33px] bg-white rounded-[25px] shadow justify-center items-end gap-[241px] inline-flex">
-            <Link href={"/"} className="justify-start items-center gap-1 flex">
-              <img className="w-[37px] h-[34px]" src="images/logo.png" />
-              <div className="text-center text-rose-400 text-[22px] font-semibold font-pre leading-[21px]">
-                연인
-              </div>
-            </Link>
-            <Link href={"/save"}>
-              <Bookmark />
-            </Link>
-          </div>
-        </header>
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
+        {children}
       </body>
     </html>
   );

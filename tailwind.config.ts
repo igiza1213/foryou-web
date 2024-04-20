@@ -12,6 +12,7 @@ const config = {
   theme: {
     fontFamily: {
       pre: "var(--pre-font)",
+      nanum: "var(--nanum-font)",
     },
     container: {
       center: true,
