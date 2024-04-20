@@ -32,8 +32,10 @@ const images = [
 async function fetchData() {
   try {
     let response: res[];
+    const host = process.env.HOST;
 
-    response = await fetch(`http://localhost:3000/api/post/getPost`, {
+    response = await fetch(`http://${host}/api/post/getPost`, {
+      cache: "no-store",
       method: "GET",
     }).then((r) => r.json());
 
